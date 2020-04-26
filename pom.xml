@@ -9,9 +9,10 @@
 		<version>2.1.3.RELEASE</version>
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
+
 	<groupId>com.apple.simpleapprest</groupId>
-	<artifactId>simpleapprest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<artifactId>SimpleAppRest</artifactId>
+	<version>0.0.1-RELEASE</version>
 	<name>simpleapprest</name>
 	<description>simpleapprest application using Spring Boot</description>
 
