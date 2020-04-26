@@ -1,4 +1,4 @@
-package com.in28minutes.fullstack.springboot.maven.crud.springbootcrudfullstackwithmaven.course;
+package com.apple.simpleapprest.course;
 
 import java.util.ArrayList;
 import java.util.List;
