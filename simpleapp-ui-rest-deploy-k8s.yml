@@ -6,8 +6,8 @@ metadata:
   name: simpleappui
 spec:
   selector:
-    name: simpleappui
-    app: simpleappui-app
+    name: simpleappui-pod
+    app: simple-multitire-app
   type: NodePort
   ports:
   - nodePort: 32000
@@ -22,17 +22,19 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: simpleappui-app
+      name: simpleappui-pod
+      app: simple-multitire-app
   replicas: 1
   template:
     metadata:
-      name: simpleappui
+      name: simpleappui-pod
       labels:
-        app: simpleappui-app
+        name: simpleappui-pod
+        app: simple-multitire-app
     spec:
       containers:
         - name: simpleappui
-          image: bathurudocker/simpleappui:1.0.0
+          image: bathurudocker/simpleappui:latest
           ports:
             - containerPort: 3000
 # Simpleapp ClusterIP Service
@@ -43,7 +45,8 @@ metadata:
   name: simpleapprest
 spec:
   selector:
-    app: simpleapprest-app
+    name: simpleapprest-pod
+    app: simple-multitire-app
   type: ClusterIP
   ports:
     - port: 8080
@@ -57,13 +60,15 @@ metadata:
 spec:
   selector:
     matchLabels:
-      app: simpleapprest-app
+      name: simpleapprest-pod
+      app: simple-multitire-app
   replicas: 1
   template:
     metadata:
-      name: simpleapprest
+      name: simpleapprest-pod
       labels:
-        app: simpleapprest-app
+        name: simpleapprest-pod
+        app: simple-multitire-app
     spec:
       containers:
         - name: simpleapprest
