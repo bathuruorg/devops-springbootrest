@@ -7,7 +7,6 @@ metadata:
 spec:
   selector:
     name: simpleappui-pod
-    app: simple-multitire-app
   type: NodePort
   ports:
   - nodePort: 32000
@@ -32,6 +31,7 @@ spec:
         name: simpleappui-pod
         app: simple-multitire-app
     spec:
+      hostname: simpleappui
       containers:
         - name: simpleappui
           image: bathurudocker/simpleappui:latest
@@ -70,6 +70,7 @@ spec:
         name: simpleapprest-pod
         app: simple-multitire-app
     spec:
+      hostname: simpleapprest
       containers:
         - name: simpleapprest
           image: bathurudocker/simpleapprest:latest
