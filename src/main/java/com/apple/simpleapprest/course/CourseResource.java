@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-@CrossOrigin(origins = { "http://simpleappui:3000", "http://simpleappui:32000", "http://localhost:3000","http://127.0.0.1:32000","http://localhost:32000",   })
+@CrossOrigin(origins = { "http://simpleappui.com" })
 @RestController
 public class CourseResource {
 

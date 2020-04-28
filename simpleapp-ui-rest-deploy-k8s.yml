@@ -7,10 +7,9 @@ metadata:
 spec:
   selector:
     name: simpleappui-pod
-  type: NodePort
+  type: LoadBalancer    #NodePort  LoadBalancer
   ports:
-  - nodePort: 32000
-    port: 3000
+  - port: 80      #nodePort: 32000
     targetPort: 3000
 ---
 #  Simpleapp Deployment
@@ -42,14 +41,14 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: simpleapprest
+  name: simpleapprest            # Hostname
 spec:
   selector:
     name: simpleapprest-pod
     app: simple-multitire-app
-  type: ClusterIP
+  type: LoadBalancer
   ports:
-    - port: 8080
+    - port: 80
       targetPort: 8080
 ---
 #  Simpleapp Deployment
@@ -70,7 +69,6 @@ spec:
         name: simpleapprest-pod
         app: simple-multitire-app
     spec:
-      hostname: simpleapprest
       containers:
         - name: simpleapprest
           image: bathurudocker/simpleapprest:latest
