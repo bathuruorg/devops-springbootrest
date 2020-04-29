@@ -46,9 +46,10 @@ spec:
   selector:
     name: simpleapprest-pod
     app: simple-multitire-app
-  type: LoadBalancer
+  type: NodePort
   ports:
-    - port: 80
+    - nodePort: 32000
+      port: 80
       targetPort: 8080
 ---
 #  Simpleapp Deployment
