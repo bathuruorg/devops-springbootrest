@@ -50,7 +50,7 @@ spec:
   type: LoadBalancer
   ports:
     - port: 80
-      targetPort: http
+      targetPort: 8080
 ---
 #  Simpleapp Deployment
 apiVersion: apps/v1
