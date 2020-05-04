@@ -1,0 +1,77 @@
+# Simpleapp NodePort Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simpleappui
+spec:
+  selector:
+    name: simpleappui-pod
+  type: LoadBalancer    #NodePort  LoadBalancer
+  ports:
+  - nodePort: 32000
+    port: 3000      #nodePort: 32000
+    targetPort: 3000
+---
+#  Simpleapp Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpleappui-deploy
+spec:
+  selector:
+    matchLabels:
+      name: simpleappui-pod
+      app: simple-multitire-app
+  replicas: 1
+  template:
+    metadata:
+      name: simpleappui-pod
+      labels:
+        name: simpleappui-pod
+        app: simple-multitire-app
+    spec:
+      hostname: simpleappui
+      containers:
+        - name: simpleappui
+          image: bathurudocker/simpleappui:latest
+          ports:
+            - containerPort: 3000
+# Simpleapp ClusterIP Service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: simpleapprest            # Hostname
+spec:
+  selector:
+    name: simpleapprest-pod
+    app: simple-multitire-app
+  type: ClusterIP
+  ports:
+    - port: 80
+      targetPort: 8080
+---
+#  Simpleapp Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simpleapprest-deploy
+spec:
+  selector:
+    matchLabels:
+      name: simpleapprest-pod
+      app: simple-multitire-app
+  replicas: 1
+  template:
+    metadata:
+      name: simpleapprest-pod
+      labels:
+        name: simpleapprest-pod
+        app: simple-multitire-app
+    spec:
+      containers:
+        - name: simpleapprest
+          image: bathurudocker/simpleapprest:latest
+          ports:
+            - containerPort: 8080
