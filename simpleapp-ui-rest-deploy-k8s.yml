@@ -7,9 +7,10 @@ metadata:
 spec:
   selector:
     name: simpleappui-pod
-  type: LoadBalancer    #NodePort  LoadBalancer
+  type: NodePort    #NodePort  LoadBalancer
   ports:
-  - port: 80      #nodePort: 32000
+  - nodePort: 32000
+    port: 80      #nodePort: 32000
     targetPort: 3000
 ---
 #  Simpleapp Deployment
@@ -46,11 +47,10 @@ spec:
   selector:
     name: simpleapprest-pod
     app: simple-multitire-app
-  type: NodePort
+  type: LoadBalancer
   ports:
-    - nodePort: 32000
-      port: 80
-      targetPort: 8080
+    - port: 80
+      targetPort: http
 ---
 #  Simpleapp Deployment
 apiVersion: apps/v1

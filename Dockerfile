@@ -23,5 +23,5 @@ RUN addgroup ${RUN_AS_USER} && \
 USER adminapp
 WORKDIR /app
 
-EXPOSE 8080
+EXPOSE 8080 80
 CMD ["/usr/lib/jvm/java-1.8-openjdk/bin/java",  "-jar", "app.jar"]
