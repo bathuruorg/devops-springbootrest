@@ -18,54 +18,53 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController
-public class CourseResource {
+public class CourseController {
 
 	@Autowired
-	private CoursesHardcodedService courseManagementService;
+	private CourseService courseManagementService;
 
 	@GetMapping("/instructors/{username}/courses")
 	public List<Course> getAllCourses(@PathVariable String username) {
+		String javahome = System.getenv().getOrDefault("JAVA_HOME", "Hi");
+		System.out.println("JAVA_HOME Env Variable From Dockerfile : " + javahome);
+
+		String username = System.getenv().getOrDefault("USERNAME", "SRINI");
+		System.out.println("USERNAME Env Variable From POD Defination file : " + username);
+
+		String passwd = System.getenv().getOrDefault("PASSWD", "1234");
+		System.out.println("PASSWD Env Variable From POD Defination file : " + passwd);
+
 		return courseManagementService.findAll();
 	}
 
 	@GetMapping("/instructors/{username}/courses/{id}")
 	public Course getCourse(@PathVariable String username, @PathVariable long id) {
-		return courseManagementService.findById(id);
+		        return courseManagementService.findById(id);
 	}
 
 	@DeleteMapping("/instructors/{username}/courses/{id}")
 	public ResponseEntity<Void> deleteCourse(@PathVariable String username, @PathVariable long id) {
-
 		Course course = courseManagementService.deleteById(id);
-
 		if (course != null) {
 			return ResponseEntity.noContent().build();
 		}
-
 		return ResponseEntity.notFound().build();
 	}
 
 	@PutMapping("/instructors/{username}/courses/{id}")
-	public ResponseEntity<Course> updateCourse(@PathVariable String username, @PathVariable long id,
-			@RequestBody Course course) {
-
-		Course courseUpdated = courseManagementService.save(course);
-
-		return new ResponseEntity<Course>(course, HttpStatus.OK);
+	public ResponseEntity<Course> updateCourse ( @PathVariable String username,
+	                                                                              @PathVariable long id,
+			                                                                          @RequestBody Course course) {
+		          Course courseUpdated = courseManagementService.save(course);
+		          return new ResponseEntity<Course>(course, HttpStatus.OK);
 	}
 
 	@PostMapping("/instructors/{username}/courses")
 	public ResponseEntity<Void> createCourse(@PathVariable String username, @RequestBody Course course) {
-
-		Course createdCourse = courseManagementService.save(course);
-
-		// Location
-		// Get current resource url
-		/// {id}
-		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdCourse.getId())
-				.toUri();
-
-		return ResponseEntity.created(uri).build();
+		         Course createdCourse = courseManagementService.save(course);
+		        // Location  // Get current resource url/// {id}
+		        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdCourse.getId())
+				        .toUri();
+		        return ResponseEntity.created(uri).build();
 	}
-
 }
