@@ -28,8 +28,8 @@ public class CourseController {
 		String javahome = System.getenv().getOrDefault("JAVA_HOME", "Hi");
 		System.out.println("JAVA_HOME Env Variable From Dockerfile : " + javahome);
 
-		String username = System.getenv().getOrDefault("USERNAME", "SRINI");
-		System.out.println("USERNAME Env Variable From POD Defination file : " + username);
+		String uname = System.getenv().getOrDefault("USERNAME", "SRINI");
+		System.out.println("USERNAME Env Variable From POD Defination file : " + uname);
 
 		String passwd = System.getenv().getOrDefault("PASSWD", "1234");
 		System.out.println("PASSWD Env Variable From POD Defination file : " + passwd);
