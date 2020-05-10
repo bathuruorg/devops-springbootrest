@@ -1,4 +1,4 @@
-# SpringRestServices
+# SpringRest
 
 Developed in springboot
 

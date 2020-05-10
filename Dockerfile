@@ -6,7 +6,7 @@ ENV PATH $PATH:$JAVA_HOME/bin
 ENV JAVA_ALPINE_VERSION 8.92.14-r0
 
 ENV RUN_AS_USER adminapp
-ENV APP SpringRestServices
+ENV APP SpringRest
 ENV VERSION 0.0.1-RELEASE
 
 RUN apk add --no-cache openjdk8="$JAVA_ALPINE_VERSION"
