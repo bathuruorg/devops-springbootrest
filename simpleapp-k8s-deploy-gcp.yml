@@ -74,3 +74,20 @@ spec:
           image: bathurudocker/simpleapprest:latest
           ports:
             - containerPort: 8080
+          env:
+            - name: USERNAME
+              value: SRINIPOD
+          envFrom:
+           - configMapRef:
+                name: simpleapp-config
+
+---
+#  Simpleapp configMap
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  creationTimestamp: 2017-12-27T18:36:28Z
+  name: simpleapp-config
+  namespace: default
+data:
+  PASSWD: sriniconfigmap

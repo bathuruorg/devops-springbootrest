@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.course;
+package com.apple.simpleapprest.model;
 
 public class Course {
 	private Long id;

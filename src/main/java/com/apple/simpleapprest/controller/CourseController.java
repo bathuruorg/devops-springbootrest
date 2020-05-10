@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.course;
+package com.apple.simpleapprest.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -15,6 +15,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+
+import com.apple.simpleapprest.model.Course;
+import com.apple.simpleapprest.service.CourseService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController
@@ -34,6 +37,9 @@ public class CourseController {
 		String passwd = System.getenv().getOrDefault("PASSWD", "1234");
 		System.out.println("PASSWD    Env Variable From configMap Defination file : " + passwd);
 
+		String dbpasswd = System.getenv().getOrDefault("DBPASSWD", "DB1234");
+		System.out.println("DBPASSWD  Env Variable From secret Defination file : " + dbpasswd);
+		
 		return courseManagementService.findAll();
 	}
 
