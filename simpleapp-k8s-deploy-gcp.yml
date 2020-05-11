@@ -3,10 +3,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: simpleappui
+  name: employeeangular
 spec:
   selector:
-    name: simpleappui-pod
+    name: employeeangular-pod
   type: LoadBalancer
   ports:
   - port: 80      #nodePort: 32000
@@ -16,35 +16,73 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simpleappui-deploy
+  name: employeeangular-deploy
 spec:
   selector:
     matchLabels:
-      name: simpleappui-pod
+      name: employeeangular-pod
       app: simple-multitire-app
   replicas: 1
   template:
     metadata:
-      name: simpleappui-pod
+      name: employeeangular-pod
       labels:
-        name: simpleappui-pod
+        name: employeeangular-pod
         app: simple-multitire-app
     spec:
-      hostname: simpleappui
+      hostname: employeeangular
       containers:
-        - name: simpleappui
-          image: bathurudocker/simpleappui:latest
+        - name: employeeangular
+          image: bathurudocker/employeeangular:latest
           ports:
             - containerPort: 3000
 # Simpleapp ClusterIP Service
 ---
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: coursereact
+  spec:
+    selector:
+      name: coursereact-pod
+    type: LoadBalancer
+    ports:
+    - port: 80      #nodePort: 32000
+      targetPort: 3000
+  ---
+  #  Simpleapp Deployment
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: coursereact-deploy
+  spec:
+    selector:
+      matchLabels:
+        name: coursereact-pod
+        app: simple-multitire-app
+    replicas: 1
+    template:
+      metadata:
+        name: coursereact-pod
+        labels:
+          name: coursereact-pod
+          app: simple-multitire-app
+      spec:
+        hostname: coursereact
+        containers:
+          - name: coursereact
+            image: bathurudocker/coursereact:latest
+            ports:
+              - containerPort: 3000
+  # Simpleapp ClusterIP Service
+---
 apiVersion: v1
 kind: Service
 metadata:
-  name: simpleapprest            # Hostname
+  name: springrest            # Hostname
 spec:
   selector:
-    name: simpleapprest-pod
+    name: springrest-pod
     app: simple-multitire-app
   type: LoadBalancer
   ports:
@@ -55,23 +93,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: simpleapprest-deploy
+  name: springrest-deploy
 spec:
   selector:
     matchLabels:
-      name: simpleapprest-pod
+      name: springrest-pod
       app: simple-multitire-app
   replicas: 1
   template:
     metadata:
-      name: simpleapprest-pod
+      name: springrest-pod
       labels:
-        name: simpleapprest-pod
+        name: springrest-pod
         app: simple-multitire-app
     spec:
       containers:
-        - name: simpleapprest
-          image: bathurudocker/simpleapprest:latest
+        - name: springrest
+          image: bathurudocker/springrest:latest
           ports:
             - containerPort: 8080
           env:
