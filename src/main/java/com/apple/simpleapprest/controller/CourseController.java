@@ -22,14 +22,14 @@ import com.apple.simpleapprest.service.CourseService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class CourseController {
 
 	@Autowired
 	private CourseService courseManagementService;
 
-	@GetMapping("/courses")
-	public List<Course> getAllCourses(@PathVariable String username) {
+	@GetMapping("courses")
+	public List<Course> getAllCourses() {
 		String javahome = System.getenv().getOrDefault("JAVA_HOME", "Hi");
 		System.out.println("JAVA_HOME Env Variable From Dockerfile : " + javahome);
 
@@ -46,12 +46,12 @@ public class CourseController {
 	}
 
 	@GetMapping("/courses/{id}")
-	public Course getCourse(@PathVariable String username, @PathVariable long id) {
+	public Course getCourse(@PathVariable long id) {
 		  return courseManagementService.findById(id);
 	}
 
 	@DeleteMapping("/courses/{id}")
-	public ResponseEntity<Void> deleteCourse(@PathVariable String username, @PathVariable long id) {
+	public ResponseEntity<Void> deleteCourse(@PathVariable long id) {
 		Course course = courseManagementService.deleteById(id);
 		if (course != null) {
 			return ResponseEntity.noContent().build();
@@ -60,15 +60,14 @@ public class CourseController {
 	}
 
 	@PutMapping("/courses/{id}")
-	public ResponseEntity<Course> updateCourse ( @PathVariable String username,
-	                                             @PathVariable long id,
+	public ResponseEntity<Course> updateCourse ( @PathVariable long id,
 			                                     @RequestBody Course course) {
 		          Course courseUpdated = courseManagementService.save(course);
 		          return new ResponseEntity<Course>(course, HttpStatus.OK);
 	}
 
 	@PostMapping("/courses")
-	public ResponseEntity<Void> createCourse(@PathVariable String username, @RequestBody Course course) {
+	public ResponseEntity<Void> createCourse(@RequestBody Course course) {
 		         Course createdCourse = courseManagementService.save(course);
 		        // Location  // Get current resource url/// {id}
 		        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(createdCourse.getId())

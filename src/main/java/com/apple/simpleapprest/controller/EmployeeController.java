@@ -28,7 +28,7 @@ import com.apple.simpleapprest.service.EmployeeService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/")
 public class EmployeeController {
 	
 	@Autowired
@@ -37,7 +37,7 @@ public class EmployeeController {
 	@Autowired
     private ModelMapper modelMapper;
 	
-	@GetMapping("/employees")
+	@GetMapping("employees")
 	public List<EmployeeDTO> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
 		return employees.stream()
@@ -45,18 +45,18 @@ public class EmployeeController {
         .collect(Collectors.toList());
 	}
 
-	@GetMapping("/employees/{id}")
+	@GetMapping("employees/{id}")
 	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(value = "id") Long employeeId) {
 		Employee employee = employeeService.getEmployeeById(employeeId).get();
 		return ResponseEntity.ok().body(convertToDto(employee));
 	}
 
-	@PostMapping("/employees")
+	@PostMapping("employees")
 	public Employee createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
 		return employeeService.createEmployee(convertToEntity(employeeDTO));
 	}
 
-	@PutMapping("/employees/{id}")
+	@PutMapping("employees/{id}")
 	public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
 			@Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
 		Employee employee = employeeService.getEmployeeById(employeeId)
@@ -69,7 +69,7 @@ public class EmployeeController {
 		return ResponseEntity.ok(updatedEmployee);
 	}
 
-	@DeleteMapping("/employees/{id}")
+	@DeleteMapping("employees/{id}")
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)
 			throws ResourceNotFoundException {
 		Employee employee = employeeService.getEmployeeById(employeeId)
