@@ -23,7 +23,7 @@ RUN addgroup ${RUN_AS_USER} && \
 USER adminapp
 WORKDIR /app
 
-EXPOSE 80
+EXPOSE  8080
 CMD ["/usr/lib/jvm/java-1.8-openjdk/bin/java",  "-jar", "app.jar"]
 
 # Red Hat JBoss Enterprise Application Platform  > docker image jboss-eap-7.1
