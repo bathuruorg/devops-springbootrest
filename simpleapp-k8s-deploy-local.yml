@@ -1,104 +1,131 @@
 # Simpleapp NodePort Service
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: simpleappui
-spec:
-  selector:
-    name: simpleappui-pod
-  type: NodePort    #NodePort  LoadBalancer
-  ports:
-  - nodePort: 32000
-    port: 80      #nodePort: 32000
-    targetPort: 3000
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: employeeangular
+  spec:
+    selector:
+      name: employeeangular-pod
+    type: NodePort
+    ports:
+    - nodePort: 32000
+      port: 80      #nodePort: 32000
+      targetPort: 4200
 ---
-#  Simpleapp Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: simpleappui-deploy
-spec:
-  selector:
-    matchLabels:
-      name: simpleappui-pod
-      app: simple-multitire-app
-  replicas: 1
-  template:
-    metadata:
-      name: simpleappui-pod
-      labels:
-        name: simpleappui-pod
+  #  Simpleapp Deployment
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: employeeangular-deploy
+  spec:
+    selector:
+      matchLabels:
+        name: employeeangular-pod
         app: simple-multitire-app
-    spec:
-      hostname: simpleappui
-      containers:
-        - name: simpleappui
-          image: bathurudocker/simpleappui:latest
-          ports:
-            - containerPort: 3000
-# Simpleapp ClusterIP Service
+    replicas: 1
+    template:
+      metadata:
+        name: employeeangular-pod
+        labels:
+          name: employeeangular-pod
+          app: simple-multitire-app
+      spec:
+        hostname: employeeangular
+        containers:
+          - name: employeeangular
+            image: bathurudocker/employeeangular:latest
+            ports:
+              - containerPort: 4200
 ---
-apiVersion: v1
-kind: Service
-metadata:
-  name: simpleapprest            # Hostname
-spec:
-  selector:
-    name: simpleapprest-pod
-    app: simple-multitire-app
-  type: LoadBalancer
-  ports:
-    - port: 80
-      targetPort: 8080
----
-#  Simpleapp Deployment
-apiVersion: apps/v1
-kind: Deployment
-metadata:
-  name: simpleapprest-deploy
-spec:
-  selector:
-    matchLabels:
-      name: simpleapprest-pod
-      app: simple-multitire-app
-  replicas: 1
-  template:
+    apiVersion: v1
+    kind: Service
     metadata:
-      name: simpleapprest-pod
-      labels:
-        name: simpleapprest-pod
-        app: simple-multitire-app
+      name: coursereact
     spec:
-      containers:
-        - name: simpleapprest
-          image: bathurudocker/simpleapprest:latest
-          ports:
-            - containerPort: 8080
-          env:
-            - name: USERNAME
-              value: SRINIPOD
-          envFrom:
-           - configMapRef:
-                name: simpleapp-config
-           - secretRef:
-                name: simpleapp-secret
+      selector:
+        name: coursereact-pod
+      type: NodePort
+      ports:
+      - nodePort: 32100
+        port: 80      #nodePort: 32000
+        targetPort: 3000
+  ---
+    #  Simpleapp Deployment
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: coursereact-deploy
+    spec:
+      selector:
+        matchLabels:
+          name: coursereact-pod
+          app: simple-multitire-app
+      replicas: 1
+      template:
+        metadata:
+          name: coursereact-pod
+          labels:
+            name: coursereact-pod
+            app: simple-multitire-app
+        spec:
+          hostname: coursereact
+          containers:
+            - name: coursereact
+              image: bathurudocker/coursereact:latest
+              ports:
+                - containerPort: 3000
 ---
-#  Simpleapp configMap
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: simpleapp-config
-  namespace: default
-data:
-  PASSWD: sriniconfigmap
-
+  apiVersion: v1
+  kind: Service
+  metadata:
+    name: springrest            # Hostname
+  spec:
+    selector:
+      name: springrest-pod
+      app: simple-multitire-app
+    type: LoadBalancer
+    ports:
+      - port: 80
+        targetPort: 8080
 ---
-#  Simpleapp configMap
-apiVersion: v1
-kind: ConfigMap
-metadata:
-  name: simpleapp-secret
-  namespace: default
-data:
-  DBPASSWD: sriniDBsecret
+  #  Simpleapp Deployment
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: springrest-deploy
+  spec:
+    selector:
+      matchLabels:
+        name: springrest-pod
+        app: simple-multitire-app
+    replicas: 1
+    template:
+      metadata:
+        name: springrest-pod
+        labels:
+          name: springrest-pod
+          app: simple-multitire-app
+      spec:
+        containers:
+          - name: springrest
+            image: bathurudocker/springrest:latest
+            ports:
+              - containerPort: 8080
+            env:
+              - name: USERNAME
+                value: SRINIPOD
+            envFrom:
+             - configMapRef:
+                  name: simpleapp-config
+---
+  #  Simpleapp configMap
+  apiVersion: v1
+  kind: ConfigMap
+  metadata:
+    creationTimestamp: 2017-12-27T18:36:28Z
+    name: simpleapp-config
+    namespace: default
+  data:
+    PASSWD: sriniconfigmap
+  
