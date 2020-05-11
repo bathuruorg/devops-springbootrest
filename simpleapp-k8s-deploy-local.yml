@@ -87,7 +87,7 @@
     type: LoadBalancer
     ports:
       - port: 80
-        targetPort: 8080
+        targetPort: 80
 ---
   #  Simpleapp Deployment
   apiVersion: apps/v1
@@ -111,7 +111,7 @@
           - name: springrest
             image: bathurudocker/springrest:latest
             ports:
-              - containerPort: 8080
+              - containerPort: 80
             env:
               - name: USERNAME
                 value: SRINIPOD
