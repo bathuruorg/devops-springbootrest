@@ -50,7 +50,7 @@
       - nodePort: 32100
         port: 80      #nodePort: 32000
         targetPort: 3000
-  ---
+---
     #  Simpleapp Deployment
     apiVersion: apps/v1
     kind: Deployment
