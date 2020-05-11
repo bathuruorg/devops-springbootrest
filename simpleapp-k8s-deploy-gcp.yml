@@ -10,7 +10,7 @@
     type: LoadBalancer
     ports:
     - port: 80      #nodePort: 32000
-      targetPort: 4200
+      targetPort: 80
 ---
   #  Simpleapp Deployment
   apiVersion: apps/v1
@@ -35,7 +35,7 @@
           - name: employeeangular
             image: bathurudocker/employeeangular:latest
             ports:
-              - containerPort: 4200
+              - containerPort: 80
 ---
     apiVersion: v1
     kind: Service
@@ -47,7 +47,7 @@
       type: LoadBalancer
       ports:
       - port: 80      #nodePort: 32000
-        targetPort: 3000
+        targetPort: 80
 ---
     #  Simpleapp Deployment
     apiVersion: apps/v1
@@ -72,7 +72,7 @@
             - name: coursereact
               image: bathurudocker/coursereact:latest
               ports:
-                - containerPort: 3000
+                - containerPort: 80
 ---
   apiVersion: v1
   kind: Service
