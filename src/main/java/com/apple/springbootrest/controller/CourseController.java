@@ -30,18 +30,6 @@ public class CourseController {
 
 	@GetMapping("/courses")
 	public List<Course> getAllCourses() {
-		String javahome = System.getenv().getOrDefault("JAVA_HOME", "Hi");
-		System.out.println("JAVA_HOME Env Variable From Dockerfile : " + javahome);
-
-		String uname = System.getenv().getOrDefault("USERNAME", "SRINI");
-		System.out.println("USERNAME  Env Variable From POD Defination file : " + uname);
-
-		String passwd = System.getenv().getOrDefault("PASSWD", "1234");
-		System.out.println("PASSWD    Env Variable From configMap Defination file : " + passwd);
-
-		String dbpasswd = System.getenv().getOrDefault("DBPASSWD", "DB1234");
-		System.out.println("DBPASSWD  Env Variable From secret Defination file : " + dbpasswd);
-		
 		return courseService.findAll();
 	}
 

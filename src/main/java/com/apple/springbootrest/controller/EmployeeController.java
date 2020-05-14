@@ -31,8 +31,7 @@ public class EmployeeController {
 	
 	@GetMapping("/employeeList")
 	public List<Employee> getAllEmployees() {
-		List<Employee> employees = employeeService.getAllEmployees();
-		return employees;
+		return employeeService.getAllEmployees();
 	}
 
 	@GetMapping("/employeeList/{id}")
@@ -58,14 +57,10 @@ public class EmployeeController {
 	}
 
 	@DeleteMapping("/deleteEmployee/{id}")
-	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId) {
+	public void deleteEmployee(@PathVariable(value = "id") Long employeeId) {
 		
 		Employee employee = employeeService.getEmployeeById(employeeId);
 		employeeService.deleteEmployee(employee);
-		
-		Map<String, Boolean> response = new HashMap<>();
-		response.put("deleted", Boolean.TRUE);
-		return response;
 	}
 	
 }
