@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.controller;
+package com.apple.springbootrest.controller;
 
 import java.util.HashMap;
 import java.util.List;
@@ -21,10 +21,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apple.simpleapprest.beans.EmployeeDTO;
-import com.apple.simpleapprest.exception.ResourceNotFoundException;
-import com.apple.simpleapprest.model.Employee;
-import com.apple.simpleapprest.service.EmployeeService;
+import com.apple.springbootrest.beans.EmployeeDTO;
+import com.apple.springbootrest.exception.ResourceNotFoundException;
+import com.apple.springbootrest.model.Employee;
+import com.apple.springbootrest.service.EmployeeService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController

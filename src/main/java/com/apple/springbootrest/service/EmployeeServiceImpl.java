@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.service;
+package com.apple.springbootrest.service;
 
 import java.util.List;
 import java.util.Optional;
@@ -6,8 +6,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.apple.simpleapprest.model.Employee;
-import com.apple.simpleapprest.repository.EmployeeRepository;
+import com.apple.springbootrest.model.Employee;
+import com.apple.springbootrest.repository.EmployeeRepository;
 
 @Service
 public class EmployeeServiceImpl implements EmployeeService{

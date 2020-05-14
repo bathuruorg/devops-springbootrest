@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.exception;
+package com.apple.springbootrest.exception;
 /*package net.guides.springboot2.springboot2jpacrudexample.exception;
 
 import java.util.Date;

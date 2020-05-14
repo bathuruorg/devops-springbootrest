@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.model;
+package com.apple.springbootrest.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

@@ -1,11 +1,11 @@
-package com.apple.simpleapprest.service;
+package com.apple.springbootrest.service;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.apple.simpleapprest.model.Course;
+import com.apple.springbootrest.model.Course;
 
 @Service
 public class CourseService {

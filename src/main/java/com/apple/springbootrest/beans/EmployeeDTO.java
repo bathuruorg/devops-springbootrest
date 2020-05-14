@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.beans;
+package com.apple.springbootrest.beans;
 
 import java.io.Serializable;
 

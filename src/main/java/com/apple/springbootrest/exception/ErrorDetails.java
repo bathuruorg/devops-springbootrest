@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.exception;
+package com.apple.springbootrest.exception;
 
 import java.util.Date;
 

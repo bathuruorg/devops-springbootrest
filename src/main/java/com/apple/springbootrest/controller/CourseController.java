@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.controller;
+package com.apple.springbootrest.controller;
 
 import java.net.URI;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import com.apple.simpleapprest.model.Course;
-import com.apple.simpleapprest.service.CourseService;
+import com.apple.springbootrest.model.Course;
+import com.apple.springbootrest.service.CourseService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController

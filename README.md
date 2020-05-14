@@ -10,10 +10,5 @@ http://192.168.43.117:8080/api/v1/employees
 
 http://192.168.43.117:8080/api/v1/employees/1
 
-docker build -t bathurudocker/simpleapprest -f Dockerfile .
 
-docker run -d -p 3000:3000 bathurudocker/simpleapprest:latest
-
-docker rm -f
-
-docker rmi bathurudocker/simpleapprest:latest
+http://localhost:8081/h2-console - H2 Console for querying the in-memory tables

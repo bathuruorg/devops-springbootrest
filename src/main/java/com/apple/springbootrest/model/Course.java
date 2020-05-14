@@ -1,4 +1,4 @@
-package com.apple.simpleapprest.model;
+package com.apple.springbootrest.model;
 
 public class Course {
 	private Long id;
