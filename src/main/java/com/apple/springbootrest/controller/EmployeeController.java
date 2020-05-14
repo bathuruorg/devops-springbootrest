@@ -38,6 +38,9 @@ public class EmployeeController {
 	@GetMapping("/employeeList/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) {
 		Employee employee = employeeService.getEmployeeById(employeeId);
+		if (employee == null || employee.equals("")){
+			throw new RuntimeException("User not found in DB");
+		}
 		return ResponseEntity.ok().body(employee);
 	}
 
@@ -54,8 +57,7 @@ public class EmployeeController {
 	}
 
 	@DeleteMapping("/deleteEmployee/{id}")
-	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)
-			throws ResourceNotFoundException {
+	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId) {
 		
 		Employee employee = employeeService.getEmployeeById(employeeId);
 		employeeService.deleteEmployee(employee);
