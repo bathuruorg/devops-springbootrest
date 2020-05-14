@@ -1,14 +1,14 @@
-# SpringRest
+# SpringBootRest
+# Developed in spring boot
 
-Developed in springboot
+http://127.0.0.1:8080/api/v1/courses
+http://127.0.0.1:8080/api/v1/courses/1
 
-http://192.168.43.117:8080/api/v1/courses
+http://127.0.0.1:8080/api/v1/employees
+http://127.0.0.1:8080/api/v1/employees/1
 
-http://192.168.43.117:8080/api/v1/courses/1
+#Console for Querying H2-Database in-memory tables
+http://127.0.0.1:8080/h2-console
 
-http://192.168.43.117:8080/api/v1/employees
-
-http://192.168.43.117:8080/api/v1/employees/1
-
-
-http://localhost:8081/h2-console - H2 Console for querying the in-memory tables
+#Swagger URL  http://127.0.0.1:8080/swagger-ui.html
+#Swagger URL  http://127.0.0.1:8080/v2/api-docs

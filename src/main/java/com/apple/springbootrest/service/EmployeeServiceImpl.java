@@ -1,8 +1,6 @@
 package com.apple.springbootrest.service;
 
 import java.util.List;
-import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,13 +15,12 @@ public class EmployeeServiceImpl implements EmployeeService{
 	
 	@Override
 	public List<Employee> getAllEmployees() {
-        // Create an employee
 		return this.employeeRepository.findAll();
 	}
 
 	@Override
-	public Optional<Employee> getEmployeeById(Long employeeId) {
-		return this.employeeRepository.findById(employeeId);
+	public Employee getEmployeeById(Long employeeId) {
+		return this.employeeRepository.findById(employeeId).get();
 	}
 
 	@Override
@@ -32,8 +29,14 @@ public class EmployeeServiceImpl implements EmployeeService{
 	}
 
 	@Override
-	public Employee updateEmployee(Employee employeeDetails) {
-		return this.employeeRepository.save(employeeDetails);
+	public Employee updateEmployee(Long employeeId, Employee employeeDetails) {
+		Employee employee = this.employeeRepository.findById(employeeId).get();
+
+		employee.setEmailId(employeeDetails.getEmailId());
+		employee.setLastName(employeeDetails.getLastName());
+		employee.setFirstName(employeeDetails.getFirstName());
+		
+		return this.employeeRepository.save(employee);
 	}
 
 	@Override

@@ -3,13 +3,9 @@ package com.apple.springbootrest.controller;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.stream.Collectors;
-
 import javax.validation.Valid;
 
-import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -21,60 +17,47 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.apple.springbootrest.beans.EmployeeDTO;
 import com.apple.springbootrest.exception.ResourceNotFoundException;
 import com.apple.springbootrest.model.Employee;
 import com.apple.springbootrest.service.EmployeeService;
 
 @CrossOrigin (origins = "*", allowedHeaders = "*")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 	
 	@Autowired
 	private EmployeeService employeeService;
-
-	@Autowired
-    private ModelMapper modelMapper;
 	
-	@GetMapping("employees")
-	public List<EmployeeDTO> getAllEmployees() {
+	@GetMapping("/employeeList")
+	public List<Employee> getAllEmployees() {
 		List<Employee> employees = employeeService.getAllEmployees();
-		return employees.stream()
-        .map(this::convertToDto)
-        .collect(Collectors.toList());
+		return employees;
 	}
 
-	@GetMapping("employees/{id}")
-	public ResponseEntity<EmployeeDTO> getEmployeeById(@PathVariable(value = "id") Long employeeId) {
-		Employee employee = employeeService.getEmployeeById(employeeId).get();
-		return ResponseEntity.ok().body(convertToDto(employee));
+	@GetMapping("/employeeList/{id}")
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) {
+		Employee employee = employeeService.getEmployeeById(employeeId);
+		return ResponseEntity.ok().body(employee);
 	}
 
-	@PostMapping("employees")
-	public Employee createEmployee(@Valid @RequestBody EmployeeDTO employeeDTO) {
-		return employeeService.createEmployee(convertToEntity(employeeDTO));
+	@PostMapping("/saveEmployee")
+	public Employee createEmployee(@Valid @RequestBody Employee employee) {
+		return employeeService.createEmployee(employee);
 	}
 
-	@PutMapping("employees/{id}")
+	@PutMapping("/updateEmployee/{id}")
 	public ResponseEntity<Employee> updateEmployee(@PathVariable(value = "id") Long employeeId,
-			@Valid @RequestBody Employee employeeDetails) throws ResourceNotFoundException {
-		Employee employee = employeeService.getEmployeeById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-
-		employee.setEmailId(employeeDetails.getEmailId());
-		employee.setLastName(employeeDetails.getLastName());
-		employee.setFirstName(employeeDetails.getFirstName());
-		final Employee updatedEmployee = employeeService.updateEmployee(employeeDetails);
+			@Valid @RequestBody Employee employeeDetails) {
+		final Employee updatedEmployee = employeeService.updateEmployee(employeeId, employeeDetails);
 		return ResponseEntity.ok(updatedEmployee);
 	}
 
-	@DeleteMapping("employees/{id}")
+	@DeleteMapping("/deleteEmployee/{id}")
 	public Map<String, Boolean> deleteEmployee(@PathVariable(value = "id") Long employeeId)
 			throws ResourceNotFoundException {
-		Employee employee = employeeService.getEmployeeById(employeeId)
-				.orElseThrow(() -> new ResourceNotFoundException("Employee not found for this id :: " + employeeId));
-
+		
+		Employee employee = employeeService.getEmployeeById(employeeId);
 		employeeService.deleteEmployee(employee);
 		
 		Map<String, Boolean> response = new HashMap<>();
@@ -82,14 +65,4 @@ public class EmployeeController {
 		return response;
 	}
 	
-	public EmployeeDTO convertToDto(Employee employee) {
-		EmployeeDTO employeeDTO = modelMapper.map(employee, EmployeeDTO.class);
-		employeeDTO.setRole("ROLE_USER");
-		return employeeDTO;
-	}
-	
-	public Employee convertToEntity(EmployeeDTO employeeDTO) {
-		Employee employee = modelMapper.map(employeeDTO, Employee.class);
-		return employee;
-	}
 }
