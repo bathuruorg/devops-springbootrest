@@ -36,10 +36,11 @@ public class EmployeeController {
 	}
 
 	@GetMapping("/employeeList/{id}")
-	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) {
+	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) 
+	                                                 throws ResourceNotFoundException{
 		Employee employee = employeeService.getEmployeeById(employeeId);
 		if (employee == null || employee.equals("")){
-			throw new RuntimeException("User not found in DB");
+			throw new ResourceNotFoundException("User not found in DB");
 		}
 		return ResponseEntity.ok().body(employee);
 	}
