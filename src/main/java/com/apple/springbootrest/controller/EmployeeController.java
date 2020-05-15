@@ -1,10 +1,10 @@
 package com.apple.springbootrest.controller;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import javax.validation.Valid;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -26,17 +26,21 @@ import com.apple.springbootrest.service.EmployeeService;
 @RequestMapping("/api/v1")
 public class EmployeeController {
 	
+	private Logger logger = LogManager.getLogger(this.getClass());
+	
 	@Autowired
 	private EmployeeService employeeService;
 	
 	@GetMapping("/employeeList")
 	public List<Employee> getAllEmployees() {
+		logger.info(" Getting All employess details... ");
 		return employeeService.getAllEmployees();
 	}
 
 	@GetMapping("/employeeList/{id}")
 	public ResponseEntity<Employee> getEmployeeById(@PathVariable(value = "id") Long employeeId) 
 	                                                 throws ResourceNotFoundException{
+		logger.info(" Getting specific employess details... ");
 		Employee employee = employeeService.getEmployeeById(employeeId);
 		if (employee == null || employee.equals("")){
 			throw new ResourceNotFoundException("User not found in DB");
