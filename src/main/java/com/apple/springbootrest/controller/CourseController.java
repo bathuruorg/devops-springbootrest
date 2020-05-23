@@ -51,7 +51,7 @@ public class CourseController {
 	public ResponseEntity<Course> updateCourse ( @PathVariable long id,
 			                                     @RequestBody Course course) {
 		          Course courseUpdated = courseService.save(course);
-		          return new ResponseEntity<Course>(course, HttpStatus.OK);
+		          return new ResponseEntity<Course>(courseUpdated, HttpStatus.OK);
 	}
 
 	@PostMapping("/courses")
