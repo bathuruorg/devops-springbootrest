@@ -16,3 +16,4 @@ http://127.0.0.1:8080/h2-console
 #HAL Browser 
 #Hal Browser is an useful tool for development by using it to follow the restfulAPIs, modify and create a new resource
 http://localhost:8080/browser/index.html#/
+
