@@ -43,7 +43,7 @@ pipeline {
                            nexusPublisher  nexusInstanceId: 'AppleNexusRepo',
                            nexusRepositoryId: 'simpleappRepo',
                            packages: [[$class: 'MavenPackage',
-                           mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/target/springbootrest-${REL_NUM}.war"]],
+                           mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/target/springbootrest-${REL_NUM}.var"]],
                            mavenCoordinate: [artifactId: 'springbootrest', groupId: 'com.apple', packaging: 'war', version: "${REL_NUM}"]]]
                    }
           }
