@@ -94,14 +94,15 @@ pipeline {
                           //sh  "docker run  -d -p 8010:8080 --name simpleapp bathurudocker/simpleapp:${VER_NUM}"
                  //} 
           //}
-          /*
+          
           stage('Deploy Into TEST') {
            sh "pwd"
-           sshagent(['docker_Server_SSH']) {
-               sh "ssh -o StrictHostKeyChecking=no ec2-user@52.66.240.70  sudo docker rm -f simpleapp || true"
-               sh "ssh -o StrictHostKeyChecking=no ec2-user@52.66.240.70  sudo docker run  -d -p 8010:8080 --name simpleapp bathurudocker/simpleapp:${VER_NUM}"
+           sshagent(['docker_server']) {
+               //sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker rm -f simpleapp || true"
+               //sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker run  -d -p 8080:8080 --name sr bathurudocker/springbootrest:${VER_NUM}"
+               sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker run  -d -p 8080:8080 --name sr bathurudocker/springbootrest"
           }
-     }     
+     }     /*
      stage('Deploy Into PROD') {
            sh "pwd"
            sshagent(['Ansible-Server-SSH']) {
