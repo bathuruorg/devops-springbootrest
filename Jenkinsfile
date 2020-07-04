@@ -101,7 +101,7 @@ pipeline {
            sshagent(['docker_server']) {
                //sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker rm -f simpleapp || true"
                //sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker run  -d -p 8080:8080 --name sr bathurudocker/springbootrest:${VER_NUM}"
-               sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker run  -d -p 8080:8080 --name sr bathurudocker/springbootrest"
+               sh "ssh -o StrictHostKeyChecking=no osboxes@192.168.43.94  sudo docker run  -d -p 8080:8080 --name sr bathurudocker/springbootrest:1.0.10"
           }
           }
      }     /*
