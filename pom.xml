@@ -11,7 +11,7 @@
 	</parent>
 
 	<groupId>com.apple.simpleapprest</groupId>
-	<artifactId>SpringBootRest</artifactId>
+	<artifactId>springbootrest</artifactId>
 	<version>${ver}.RELEASE</version>
 	<name>springbootrest</name>
 	<description>SimpleRestAPI Application using Spring Boot</description>

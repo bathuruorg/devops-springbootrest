@@ -43,8 +43,8 @@ pipeline {
                            nexusPublisher  nexusInstanceId: 'AppleNexusRepo',
                            nexusRepositoryId: 'simpleappRepo',
                            packages: [[$class: 'MavenPackage',
-                           mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/target/simpleapp-${REL_NUM}.war"]],
-                           mavenCoordinate: [artifactId: 'simpleapp', groupId: 'com.apple', packaging: 'war', version: "${REL_NUM}"]]]
+                           mavenAssetList: [[classifier: '', extension: '', filePath: "${WORKSPACE}/target/springbootrest-${REL_NUM}.war"]],
+                           mavenCoordinate: [artifactId: 'springbootrest', groupId: 'com.apple', packaging: 'war', version: "${REL_NUM}"]]]
                    }
           }
 
@@ -59,7 +59,7 @@ pipeline {
                                           //  do nothing if there is an exception
                                           }
                             }
-                          sh "docker build -t bathurudocker/simpleapp:${VER_NUM} ."
+                          sh "docker build -t bathurudocker/springbootrest:${VER_NUM} ."
                           //withCredentials([string(credentialsId: 'dockerHubPwd', variable: 'dockerpwd')]) {
                             //     sh "docker login -u bathurudocker -p ${dockerpwd}"
                         // }
