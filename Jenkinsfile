@@ -1,3 +1,5 @@
+properties([pipelineTriggers([githubPush()])])
+
 pipeline {
     agent {
           label 'jenkins-slave-1'
@@ -18,6 +20,16 @@ pipeline {
                  steps {
                      echo pwd;
                      git credentialsId: 'github-credentials' , url: 'https://github.com/bathuruorg/devops-springbootrest.git',  branch: 'master'   
+
+               checkout([
+                 $class: 'GitSCM',
+                 branches: [[name: 'master']],
+                 userRemoteConfigs: [[
+                    url: 'git@github.com:bathuruorg/devops-springbootrest.git',
+                    credentialsId: 'github-credentials'
+                 ]]
+                ])
+
                 }
            }
 
