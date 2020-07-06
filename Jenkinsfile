@@ -23,7 +23,7 @@ pipeline {
                  $class: 'GitSCM',
                  branches: [[name: 'master']],
                  userRemoteConfigs: [[
-                    url: 'git@github.com:bathuruorg/devops-springbootrest.git',
+                    url: 'https://github.com/bathuruorg/devops-springbootrest.git',
                     credentialsId: 'github-credentials'
                  ]]
                 ])
