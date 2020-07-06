@@ -19,8 +19,6 @@ pipeline {
            stage ('Git Checkout') {
                  steps {
                      echo pwd;
-                     git credentialsId: 'github-credentials' , url: 'https://github.com/bathuruorg/devops-springbootrest.git',  branch: 'master'   
-
                checkout([
                  $class: 'GitSCM',
                  branches: [[name: 'master']],
